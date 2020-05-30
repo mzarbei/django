@@ -1,0 +1,9 @@
+{% if articles_list %}
+<ul>
+    {% for article in articles_list %}
+        <li><a href="{% url 'articles:details' article.id %}">{{ article.artice_name }}</a></li><!--/articles/{{ article.id }}/-->
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

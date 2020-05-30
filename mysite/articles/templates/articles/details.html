@@ -1,0 +1,24 @@
+{{article.artice_name}}
+<ul>
+{% for author in article.author_set.all %}
+<li><a href="{% url 'articles:index' article.id %}"></a></li>
+{% endfor %}
+</ul>
+<h1>{{article.artice_name }}</h1>
+{{article.author_set.first}} ----- {{forloop.counter}} ----
+{% if error_message%} <p><strong>{{error_message}}</strong></p>{% endif %}
+<form action="{% url 'articles:add' article.id %}" method="POST">
+   {% csrf_token %}
+   {% for author in article.author_set.all  %}
+      <input type="text" name="first" id="author{{forloop.counter}}" value="{{author.first}}">
+      <label for="author{{ forloop.counter }}">{{author.first}}</label><br>
+      <input type="text" name="last" id="author{{forloop.counter}}" value="{{author.last}}">
+      <label for="author{{ forloop.counter }}">{{author.last}}</label>
+        
+    
+   {% endfor %}
+   <input type="submit" value="Vote">
+</form>
+{{article.id}}<br>
+{{article.artice_name}}<br>
+{{article.pub_date}}
